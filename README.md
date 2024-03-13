@@ -89,43 +89,50 @@ This guide will walk you through the process of setting up Kinect_v2 in ROS Noet
       
       ![Screenshot from 2024-03-13 18-34-50](https://github.com/Shivam-Kumar-1/ros-noetic-kinect-v2_setup/assets/99700035/8d3b5c16-9c0e-483f-ae34-b2e98d816acd)
 
-    - Source the setup script:
-      ```bash
-         source ~/catkin_ws/devel/setup.bash
-      ```
-      Now, we will launch the freenect example for depth registration, which allows you to obtain the point cloud with RGB data superimposed over it.
-      ```bash
-      roslaunch freenect_launch freenect.launch depth_registration:=true
-      ```
-      visualize the topics from Kinect on Rviz, open a new terminal and launch rviz.
-      ```bash
-         rviz
-      ```
-      Now need to setup some parameters on rviz to visualize the depth registration data.
-      1.  In the ‘Global Options’ set the ‘Fixed Frame’ to ‘camera_link’.
-      2.  Add ‘pointcloud2’ object and set the topic to ‘/camera/depth_registered/points’
-      
-      ![Screenshot from 2024-03-13 17-21-21](https://github.com/5h1v4m-0/ros-noetic-kinectv1-setup/assets/99700035/899d2cdd-3280-4b56-834b-41ee46b90b92)
-      
       follow this step to change the code of kinect viewer
       ```bash
          cd ~/catkin_ws/src/iai_kinect2_opencv4/kinect2_viewer
          ls
          sudo gedit CMakeLists.txt 
       ```
-       add this two line in 
+       add this two line in Cmakelist.txt file
+        ```bash
+        set(CMAKE_CXX_STANDARD 14)
+        set(CMAKE_CXX_STANDARD_REQUIRED ON)
+        ```
+        ![Screenshot from 2024-03-13 18-43-40](https://github.com/Shivam-Kumar-1/ros-noetic-kinect-v2_setup/assets/99700035/d36006b8-8c8b-4db3-8a39-198f251821cd)
+      Now build
+      ```bash
+      cd ~/catkin_ws
+      catkin_make
+      ```
+
+
+
+    - Source the setup script:
+      ```bash
+         source ~/catkin_ws/devel/setup.bash
+      ```
+    5. Launch 
+      Now, we will launch the kinect2_bridge
+      ```bash
+      roslaunch kinect2_bridge kinect2_bridge.launch publish_tf:=true
+      ```
+      visualize the topics from Kinect on Rviz, open a new terminal and launch rviz.
+      ```bash
+         rviz
+      ```
+      
+      Now need to setup some parameters on rviz to visualize the depth pointclod
+      1.  In the ‘Global Options’ set the ‘Fixed Frame’ to ‘camera_link’.
+      2.  Add ‘pointcloud2’ object and set the topic to ‘/kinect2/qhd/points’
+      
+      ![Screenshot from 2024-03-13 17-21-21](https://github.com/5h1v4m-0/ros-noetic-kinectv1-setup/assets/99700035/899d2cdd-3280-4b56-834b-41ee46b90b92)
+      
+      
 
       Now wait for a few seconds to get the points on display!
-  5. **Refrences**
-     
-     https://aibegins.net/2020/11/22/give-your-next-robot-3d-vision-kinect-v1-with-ros-noetic/
-     
-     http://www.choitek.com/uploads/5/0/8/4/50842795/ros_kinect.pdf
-     
-     http://wiki.ros.org/ROS/Tutorials/CreatingPackage
-     
-     https://naman5.wordpress.com/2014/06/24/experimenting-with-kinect-using-opencv-python-and-open-kinect-libfreenect/
-     
+  
       
 
       
