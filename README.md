@@ -132,6 +132,8 @@ This guide will walk you through the process of setting up Kinect_v2 in ROS Noet
       
 
       Now wait for a few seconds to get the points on display!
+    
+      for calibration see: ([kinect2_calibration](https://github.com/code-iai/iai_kinect2/tree/master/kinect2_calibration))
   
       
 
